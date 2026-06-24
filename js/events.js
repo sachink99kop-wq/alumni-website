@@ -11,9 +11,9 @@ let allEvents = []
 let activeTab = 'upcoming'
 
 const PLACEHOLDERS = [
-  { id: 'ph1', title: 'Annual Alumni Reunion 2026', description: 'An evening of nostalgia, networking and live music with batches across decades.', event_date: '2026-12-20', event_time: '18:00:00', location: 'Main Campus Lawn', image_url: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800&q=60' },
-  { id: 'ph2', title: 'Tech Careers Panel', description: 'Industry-leading alumni share insights on building careers in technology.', event_date: '2026-09-10', event_time: '11:00:00', location: 'Online (Zoom)', image_url: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=60' },
-  { id: 'ph3', title: 'Founders Day 2024', description: 'We celebrated 62 years of academic excellence and community spirit.', event_date: '2024-02-15', event_time: '10:00:00', location: 'Auditorium', image_url: 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=800&q=60' },
+  { id: 'ph1', title: 'Annual Old Cadets Reunion 2026', description: 'An evening of nostalgia, a formal mess dinner and reconnecting with course-mates across decades.', event_date: '2026-12-20', event_time: '18:00:00', location: 'Academy Parade Ground', image_url: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800&q=60' },
+  { id: 'ph2', title: 'SSB & NDA Guidance Camp', description: 'Serving officers mentor cadets and aspirants on the Services Selection Board and academy life.', event_date: '2026-09-10', event_time: '09:00:00', location: 'Cadets Auditorium', image_url: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=60' },
+  { id: 'ph3', title: 'Founders Day & Investiture 2024', description: 'We celebrated 62 years of forging officers for the Army, Navy and Air Force.', event_date: '2024-02-15', event_time: '10:00:00', location: 'Drill Square', image_url: 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=800&q=60' },
 ]
 
 function fmtDate(d) {

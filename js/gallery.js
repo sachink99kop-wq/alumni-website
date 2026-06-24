@@ -12,14 +12,14 @@ let filtered = []
 let activeCat = 'all'
 
 const SAMPLE = [
-  { id: 's1', title: 'Reunion 2023', category: 'reunion', image_url: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800&q=60' },
-  { id: 's2', title: 'Annual Sports Meet', category: 'sports', image_url: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=800&q=60' },
-  { id: 's3', title: 'Convocation Day', category: 'convocation', image_url: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=800&q=60' },
-  { id: 's4', title: 'Cultural Night', category: 'cultural', image_url: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=60' },
-  { id: 's5', title: 'Batch Reunion Dinner', category: 'reunion', image_url: 'https://images.unsplash.com/photo-1530023367847-a683933f4172?auto=format&fit=crop&w=800&q=60' },
-  { id: 's6', title: 'Football Finals', category: 'sports', image_url: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=800&q=60' },
-  { id: 's7', title: 'Graduation Throws', category: 'convocation', image_url: 'https://images.unsplash.com/photo-1627556704302-624286467c65?auto=format&fit=crop&w=800&q=60' },
-  { id: 's8', title: 'Dance Performance', category: 'cultural', image_url: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=60' },
+  { id: 's1', title: 'Passing-Out Parade', category: 'parade', image_url: 'https://images.unsplash.com/photo-1551892589-865f69869476?auto=format&fit=crop&w=800&q=60' },
+  { id: 's2', title: 'Annual Athletics Meet', category: 'sports', image_url: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=800&q=60' },
+  { id: 's3', title: 'Obstacle Course Training', category: 'training', image_url: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=60' },
+  { id: 's4', title: 'Cultural Evening', category: 'cultural', image_url: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=60' },
+  { id: 's5', title: 'Old Cadets Reunion Dinner', category: 'reunion', image_url: 'https://images.unsplash.com/photo-1530023367847-a683933f4172?auto=format&fit=crop&w=800&q=60' },
+  { id: 's6', title: 'Inter-House Football', category: 'sports', image_url: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=800&q=60' },
+  { id: 's7', title: 'Drill on the Square', category: 'parade', image_url: 'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?auto=format&fit=crop&w=800&q=60' },
+  { id: 's8', title: 'Camp & Field Craft', category: 'training', image_url: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=60' },
 ]
 
 function tile(img, idx) {

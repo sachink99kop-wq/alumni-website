@@ -4,22 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>Admin — ShivMaya State College Alumni</title>
+  <title>Admin — Sainik Military School Alumni</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: { extend: {
         colors: { navy: { DEFAULT: '#1E3A5F', light: '#2c5282', dark: '#15293f' }, amber: { 400: '#F7B84B', 500: '#F5A623', 600: '#d98e0f' }, lightgray: '#F8F9FA' },
-        fontFamily: { display: ['"Playfair Display"', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
+        fontFamily: { display: ['"Oswald"', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
       } },
     }
   </script>
   <style>
     body { font-family: 'Inter', sans-serif; }
-    .font-display { font-family: 'Playfair Display', serif; }
+    .font-display { font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: .04em; }
     .bg-navy { background-color: #1E3A5F; }
     .text-navy { color: #1E3A5F; }
     .inp { width:100%; padding:.6rem .9rem; border:1px solid #d1d5db; border-radius:.6rem; outline:none; transition:border-color .15s, box-shadow .15s; background:#fff; }
@@ -76,9 +76,10 @@
           <div>
             <label class="block text-sm font-medium mb-1">Category *</label>
             <select name="category" class="inp">
+              <option value="parade">Parade</option>
+              <option value="training">Training</option>
               <option value="reunion">Reunion</option>
               <option value="sports">Sports</option>
-              <option value="convocation">Convocation</option>
               <option value="cultural">Cultural</option>
             </select>
           </div>
@@ -133,6 +134,34 @@
 
         <h3 class="font-semibold text-navy mt-8 mb-3 text-sm uppercase tracking-wide">Existing events</h3>
         <div id="eventList" class="space-y-2"></div>
+      </section>
+
+      <!-- REPORTS -->
+      <section class="bg-white rounded-2xl shadow-sm p-6 sm:p-8 lg:col-span-2">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
+          <h2 class="font-display text-2xl font-bold text-navy">Reports</h2>
+          <div class="flex items-center gap-2">
+            <span id="reportCount" class="text-sm text-gray-500"></span>
+            <button id="reportRefresh" class="px-3 py-2 rounded-full bg-lightgray hover:bg-gray-200 text-navy text-sm font-medium transition-colors">Refresh</button>
+            <button id="reportExport" class="px-4 py-2 rounded-full bg-navy text-white text-sm font-semibold hover:bg-navy-light transition-colors inline-flex items-center gap-1.5">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1M12 12V4m0 8l-4-4m4 4l4-4"/></svg>
+              Export CSV
+            </button>
+          </div>
+        </div>
+
+        <!-- Report tabs -->
+        <div id="reportTabs" class="flex flex-wrap gap-2 mb-5">
+          <button class="report-tab px-4 py-2 rounded-full text-sm font-semibold bg-amber-500 text-navy" data-table="alumni_registrations" data-label="Registrations">Registrations</button>
+          <button class="report-tab px-4 py-2 rounded-full text-sm font-semibold bg-lightgray text-navy" data-table="donations" data-label="Donations">Donations</button>
+          <button class="report-tab px-4 py-2 rounded-full text-sm font-semibold bg-lightgray text-navy" data-table="contact_messages" data-label="Contact Messages">Contact Messages</button>
+          <button class="report-tab px-4 py-2 rounded-full text-sm font-semibold bg-lightgray text-navy" data-table="event_registrations" data-label="Event Signups">Event Signups</button>
+          <button class="report-tab px-4 py-2 rounded-full text-sm font-semibold bg-lightgray text-navy" data-table="newsletter_subscribers" data-label="Newsletter">Newsletter</button>
+        </div>
+
+        <div class="overflow-x-auto border border-gray-100 rounded-xl">
+          <div id="reportTable" class="min-w-full"></div>
+        </div>
       </section>
     </main>
   </div>

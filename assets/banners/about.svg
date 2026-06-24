@@ -5,19 +5,20 @@
     </linearGradient>
   </defs>
   <rect width="1600" height="450" fill="url(#g)"/>
-  <!-- classical columned building -->
-  <g fill="#F5A623" opacity="0.15">
-    <polygon points="1200,120 1500,120 1350,60"/>
-    <rect x="1200" y="120" width="300" height="22"/>
-    <rect x="1215" y="150" width="24" height="200"/><rect x="1275" y="150" width="24" height="200"/>
-    <rect x="1335" y="150" width="24" height="200"/><rect x="1395" y="150" width="24" height="200"/>
-    <rect x="1455" y="150" width="24" height="200"/>
-    <rect x="1190" y="352" width="320" height="20"/>
+  <!-- heraldic shield crest -->
+  <g transform="translate(1300,110)" opacity="0.18">
+    <path d="M0 0 L200 0 L200 120 Q200 240 100 280 Q0 240 0 120 Z" fill="none" stroke="#F5A623" stroke-width="5"/>
+    <line x1="0" y1="95" x2="200" y2="95" stroke="#F5A623" stroke-width="4"/>
+    <!-- star -->
+    <g transform="translate(100,55)" fill="#F7B84B"><polygon points="0,-26 7,-8 26,-8 11,4 17,22 0,11 -17,22 -11,4 -26,-8 -7,-8"/></g>
+    <!-- open book (learning) -->
+    <path d="M40 130 Q100 110 160 130 L160 200 Q100 180 40 200 Z" fill="none" stroke="#F7B84B" stroke-width="4"/>
+    <line x1="100" y1="120" x2="100" y2="190" stroke="#F7B84B" stroke-width="3"/>
   </g>
-  <!-- open book -->
-  <g fill="none" stroke="#F7B84B" stroke-width="3" opacity="0.3">
-    <path d="M180 300 Q280 260 380 300 L380 200 Q280 165 180 200 Z"/>
-    <path d="M380 300 Q480 260 580 300 L580 200 Q480 165 380 200 Z"/>
-    <line x1="380" y1="200" x2="380" y2="300"/>
+  <!-- laurel wreath (left) -->
+  <g transform="translate(280,225)" opacity="0.16" stroke="#F7B84B" stroke-width="4" fill="none">
+    <path d="M-90 0 Q-70 -90 0 -120"/><path d="M90 0 Q70 -90 0 -120"/>
+    <path d="M-90 0 Q-70 90 0 120"/><path d="M90 0 Q70 90 0 120"/>
+    <g fill="#F7B84B" stroke="none"><circle cx="-78" cy="-40" r="6"/><circle cx="-60" cy="-75" r="6"/><circle cx="78" cy="-40" r="6"/><circle cx="60" cy="-75" r="6"/><circle cx="-78" cy="40" r="6"/><circle cx="78" cy="40" r="6"/></g>
   </g>
 </svg>

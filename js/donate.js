@@ -107,9 +107,9 @@ document.getElementById('donateAgain').addEventListener('click', () => {
 const wall = document.getElementById('donorWall')
 
 const SAMPLE_DONORS = [
-  { donor_name: 'Anonymous', amount: 5000, purpose: 'Scholarship Fund' },
-  { donor_name: 'R. Sharma', amount: 2500, purpose: 'Infrastructure' },
-  { donor_name: 'Meera Iyer', amount: 1000, purpose: 'General' },
+  { donor_name: 'Col. (Retd) R. Sharma', amount: 5000, purpose: 'Cadet Scholarship Fund' },
+  { donor_name: 'Anonymous', amount: 2500, purpose: 'Training & Infrastructure' },
+  { donor_name: 'Lt Cdr M. Iyer', amount: 1000, purpose: 'Veterans & Welfare Fund' },
 ]
 
 function donorRow(d) {

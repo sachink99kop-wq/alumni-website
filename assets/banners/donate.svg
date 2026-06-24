@@ -5,12 +5,13 @@
     </linearGradient>
   </defs>
   <rect width="1600" height="450" fill="url(#g)"/>
-  <!-- hand holding heart -->
-  <g opacity="0.2">
-    <path d="M1360 150 c-26 -26 -70 -26 -96 0 l-14 14 -14 -14 c-26 -26 -70 -26 -96 0 c-26 26 -26 70 0 96 l110 110 110 -110 c26 -26 26 -70 0 -96 z" fill="#F5A623"/>
-    <path d="M1130 290 q-40 10 -60 50 l260 0 q-10 -50 -60 -60 z" fill="#F7B84B"/>
+  <!-- medal on ribbon -->
+  <g transform="translate(1320,120)" opacity="0.2">
+    <polygon points="-40,0 40,0 20,70 -20,70" fill="#F7B84B"/>
+    <circle cx="0" cy="120" r="55" fill="#F5A623"/>
+    <g transform="translate(0,120)" fill="#1E3A5F"><polygon points="0,-30 9,-9 31,-9 13,4 20,26 0,13 -20,26 -13,4 -31,-9 -9,-9"/></g>
   </g>
-  <!-- coins -->
+  <!-- coins with star -->
   <g opacity="0.3" fill="none" stroke="#F7B84B" stroke-width="3">
     <ellipse cx="280" cy="300" rx="70" ry="22"/><ellipse cx="280" cy="280" rx="70" ry="22"/><ellipse cx="280" cy="260" rx="70" ry="22"/>
     <ellipse cx="430" cy="310" rx="55" ry="18"/><ellipse cx="430" cy="296" rx="55" ry="18"/>

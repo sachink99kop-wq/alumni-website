@@ -42,6 +42,7 @@ function enterDashboard(session) {
   if (who && session?.user?.email) who.textContent = session.user.email
   loadGallery()
   loadEvents()
+  initReports()
 }
 
 // ---------- Login ----------
@@ -235,6 +236,105 @@ async function removeRow(table, id, reload) {
 
 function esc(s = '') {
   return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]))
+}
+
+// ============================================================
+//  REPORTS — admin-only view of submitted data
+// ============================================================
+const REPORT = {
+  current: 'alumni_registrations',
+  label: 'Registrations',
+  rows: [],
+}
+
+// Hide noisy columns in the on-screen table (still included in CSV export)
+const HIDDEN_COLS = ['id', 'is_read']
+
+function initReports() {
+  const tabs = document.querySelectorAll('.report-tab')
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach((t) => {
+        const on = t === tab
+        t.className = `report-tab px-4 py-2 rounded-full text-sm font-semibold ${on ? 'bg-amber-500 text-navy' : 'bg-lightgray text-navy'}`
+      })
+      REPORT.current = tab.dataset.table
+      REPORT.label = tab.dataset.label
+      loadReport()
+    })
+  })
+  document.getElementById('reportRefresh').addEventListener('click', loadReport)
+  document.getElementById('reportExport').addEventListener('click', exportCsv)
+  loadReport()
+}
+
+async function loadReport() {
+  const box = document.getElementById('reportTable')
+  const count = document.getElementById('reportCount')
+  box.innerHTML = `<div class="flex justify-center py-10">${window.spinner('h-7 w-7')}</div>`
+  count.textContent = ''
+  try {
+    const { data, error } = await supabase
+      .from(REPORT.current)
+      .select('*')
+      .order('created_at', { ascending: false })
+    if (error) throw error
+    REPORT.rows = data || []
+    count.textContent = `${REPORT.rows.length} record${REPORT.rows.length === 1 ? '' : 's'}`
+    renderReport()
+  } catch (err) {
+    console.error(err)
+    REPORT.rows = []
+    box.innerHTML = `<div class="p-6 text-sm text-red-600">
+      Could not load <strong>${REPORT.label}</strong>: ${esc(err.message)}<br>
+      <span class="text-gray-500">Make sure the admin SELECT policy exists for this table (see README / setup SQL).</span>
+    </div>`
+  }
+}
+
+function renderReport() {
+  const box = document.getElementById('reportTable')
+  if (!REPORT.rows.length) {
+    box.innerHTML = `<div class="p-8 text-center text-gray-400 text-sm">No ${esc(REPORT.label.toLowerCase())} yet.</div>`
+    return
+  }
+  const cols = Object.keys(REPORT.rows[0]).filter((c) => !HIDDEN_COLS.includes(c))
+  const head = cols.map((c) => `<th class="px-3 py-2 text-left font-semibold text-navy whitespace-nowrap">${esc(prettify(c))}</th>`).join('')
+  const body = REPORT.rows.map((row) => {
+    const tds = cols.map((c) => `<td class="px-3 py-2 align-top text-gray-700 max-w-xs truncate" title="${esc(cell(row[c]))}">${esc(cell(row[c]))}</td>`).join('')
+    return `<tr class="border-t border-gray-100 hover:bg-lightgray/60">${tds}</tr>`
+  }).join('')
+  box.innerHTML = `<table class="min-w-full text-sm">
+    <thead class="bg-lightgray sticky top-0"><tr>${head}</tr></thead>
+    <tbody>${body}</tbody></table>`
+}
+
+function prettify(col) {
+  return col.replace(/_/g, ' ').replace(/\b\w/g, (m) => m.toUpperCase())
+}
+function cell(v) {
+  if (v === null || v === undefined) return ''
+  if (typeof v === 'string' && /^\d{4}-\d{2}-\d{2}T/.test(v)) return new Date(v).toLocaleString()
+  return String(v)
+}
+
+function exportCsv() {
+  if (!REPORT.rows.length) { window.showToast('Nothing to export.', 'info'); return }
+  const cols = Object.keys(REPORT.rows[0])
+  const escCsv = (v) => {
+    const s = v === null || v === undefined ? '' : String(v)
+    return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s
+  }
+  const lines = [cols.join(',')]
+  REPORT.rows.forEach((r) => lines.push(cols.map((c) => escCsv(r[c])).join(',')))
+  const blob = new Blob(['﻿' + lines.join('\n')], { type: 'text/csv;charset=utf-8;' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = `${REPORT.current}-${new Date().toISOString().slice(0, 10)}.csv`
+  a.click()
+  URL.revokeObjectURL(url)
+  window.showToast('CSV downloaded.', 'success')
 }
 
 init()

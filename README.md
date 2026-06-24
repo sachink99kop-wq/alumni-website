@@ -1,6 +1,6 @@
-# ShivMaya State College — Alumni Association Website
+# Sainik Military School — Alumni Association Website
 
-A professional, fully responsive **College Alumni Organization** website built with
+A professional, fully responsive **Military School Old Cadets** website built with
 **vanilla HTML5 + Tailwind CSS (CDN) + vanilla JavaScript (ES6 modules)** and a
 **Supabase** (PostgreSQL + Auth + Storage) backend.
 
@@ -21,7 +21,7 @@ or host anywhere.
 | `registration.html` | **3-step** alumni form, progress bar, per-step validation, duplicate-email check |
 | `contact.html` | Contact form, info cards, Google Maps embed, social links, toast notifications |
 
-Design: navy `#1E3A5F` + gold `#F5A623`, Playfair Display headings / Inter body,
+Design: navy `#1E3A5F` + gold `#F5A623`, Oswald headings / Inter body,
 mobile-first, Intersection-Observer fade-ins, sticky nav with active-link highlighting,
 loading spinners, inline validation, and graceful error handling on every async call.
 
@@ -246,6 +246,54 @@ data and the donation confirmation still shows a locally generated reference ID.
 
 ---
 
+## 🛡️ Admin Panel & Reports (`admin.html`)
+
+`admin.html` is a private, **noindex** page (not linked in the public nav — reached via
+the **Admin Login** button or directly at `/admin.html`). It uses **Supabase Auth**, so
+only a real logged-in staff account can use it — the public anon key can still only do
+what the public RLS policies allow.
+
+From the panel an admin can:
+- **Upload gallery photos** (to Storage) and **publish events** (with a cover image)
+- **Delete** gallery photos and events
+- **View Reports** of every form submission — Registrations, Donations, Contact
+  Messages, Event Signups, Newsletter — with record counts and **CSV export**
+
+### One-time setup
+
+**1. Storage bucket** — Supabase → **Storage** → New bucket named **`images`**, **Public** ON.
+
+**2. Admin write + read policies** (SQL Editor → Run):
+
+```sql
+-- Gallery & events: authenticated admins can add/remove
+create policy "auth insert gallery" on gallery_images for insert to authenticated with check (true);
+create policy "auth delete gallery" on gallery_images for delete to authenticated using (true);
+create policy "auth insert events"  on events         for insert to authenticated with check (true);
+create policy "auth delete events"  on events         for delete to authenticated using (true);
+
+-- Storage objects: public can view, admins can upload/delete
+create policy "public read images"  on storage.objects for select using ( bucket_id = 'images' );
+create policy "auth upload images"  on storage.objects for insert to authenticated with check ( bucket_id = 'images' );
+create policy "auth delete images"  on storage.objects for delete to authenticated using ( bucket_id = 'images' );
+
+-- Reports: only authenticated admins can READ the submitted data
+create policy "auth read alumni"     on alumni_registrations   for select to authenticated using (true);
+create policy "auth read donations"  on donations              for select to authenticated using (true);
+create policy "auth read contact"    on contact_messages       for select to authenticated using (true);
+create policy "auth read event_reg"  on event_registrations    for select to authenticated using (true);
+create policy "auth read newsletter" on newsletter_subscribers for select to authenticated using (true);
+```
+
+**3. Create the admin user** — Supabase → **Authentication → Users → Add user** →
+enter an email + password (tick *Auto Confirm User*). Use those credentials on the
+admin login screen.
+
+> The public-facing forms stay write-only: visitors can submit registrations, donations
+> and messages but can never read them back. Reading requires the admin login.
+
+---
+
 ## ☁️ Deploy
 
 ### Netlify
@@ -271,4 +319,4 @@ data and the donation confirmation still shows a locally generated reference ID.
 
 ---
 
-© ShivMaya State College Alumni Association · Powered by ShivMaya State College
+© Sainik Military School Alumni Association · Powered by Sainik Military School

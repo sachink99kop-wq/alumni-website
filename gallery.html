@@ -3,24 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ShivMaya State College Alumni — Gallery</title>
-  <meta name="description" content="Memories from reunions, sports, convocations and more." />
+  <title>Sainik Military School Alumni — Gallery</title>
+  <meta name="description" content="Memories from parades, training, reunions and sports at Sainik Military School." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: { extend: {
         colors: { navy: { DEFAULT: '#1E3A5F', light: '#2c5282', dark: '#15293f' }, amber: { 400: '#F7B84B', 500: '#F5A623', 600: '#d98e0f' }, lightgray: '#F8F9FA' },
-        fontFamily: { display: ['"Playfair Display"', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
+        fontFamily: { display: ['"Oswald"', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
       } },
     }
   </script>
   <style>
     html { scroll-behavior: smooth; }
     body { font-family: 'Inter', sans-serif; }
-    .font-display { font-family: 'Playfair Display', serif; }
+    .font-display { font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: .04em; }
     .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
     .fade-in.visible { opacity: 1; transform: none; }
     .bg-navy { background-color: #1E3A5F; }
@@ -41,7 +41,7 @@
     <div class="absolute inset-0 bg-navy/55"></div>
     <div class="relative max-w-7xl mx-auto px-4 text-center">
       <h1 class="font-display text-4xl font-bold mb-3">Gallery</h1>
-      <p class="text-gray-200">A look back at the moments that bring us together.</p>
+      <p class="text-gray-200">Parades, training, reunions — moments from the making of officers.</p>
     </div>
   </section>
 
@@ -50,9 +50,10 @@
       <!-- Filters -->
       <div id="filters" class="flex flex-wrap justify-center gap-2 mb-10">
         <button class="filter-btn active px-5 py-2 rounded-full border border-gray-300 font-medium" data-cat="all">All</button>
+        <button class="filter-btn px-5 py-2 rounded-full border border-gray-300 font-medium" data-cat="parade">Parade</button>
+        <button class="filter-btn px-5 py-2 rounded-full border border-gray-300 font-medium" data-cat="training">Training</button>
         <button class="filter-btn px-5 py-2 rounded-full border border-gray-300 font-medium" data-cat="reunion">Reunion</button>
         <button class="filter-btn px-5 py-2 rounded-full border border-gray-300 font-medium" data-cat="sports">Sports</button>
-        <button class="filter-btn px-5 py-2 rounded-full border border-gray-300 font-medium" data-cat="convocation">Convocation</button>
         <button class="filter-btn px-5 py-2 rounded-full border border-gray-300 font-medium" data-cat="cultural">Cultural</button>
       </div>
 

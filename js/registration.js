@@ -188,9 +188,9 @@ form.addEventListener('submit', async (e) => {
 
 function finish(payload) {
   const labels = {
-    full_name: 'Name', email: 'Email', phone: 'Phone', graduation_year: 'Graduation Year',
-    degree: 'Degree', department: 'Department', current_job_title: 'Job Title',
-    current_company: 'Company', city: 'City', country: 'Country', linkedin_url: 'LinkedIn',
+    full_name: 'Name', email: 'Email', phone: 'Phone', graduation_year: 'Passing-Out Year',
+    degree: 'Course / Wing', department: 'House / Squadron', current_job_title: 'Rank / Designation',
+    current_company: 'Service & Unit', city: 'City', country: 'Country', linkedin_url: 'LinkedIn',
   }
   const rows = Object.entries(labels)
     .filter(([k]) => payload[k])

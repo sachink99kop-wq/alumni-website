@@ -5,21 +5,23 @@
     </linearGradient>
   </defs>
   <rect width="1600" height="450" fill="url(#g)"/>
-  <!-- envelope -->
+  <!-- envelope with wax-seal star -->
   <g opacity="0.2">
     <rect x="1260" y="150" width="240" height="160" rx="12" fill="#F5A623"/>
     <path d="M1260 165 L1380 250 L1500 165" fill="none" stroke="#1E3A5F" stroke-width="8"/>
+    <g transform="translate(1380,250)" fill="#1E3A5F"><polygon points="0,-22 7,-7 22,-7 10,4 14,20 0,11 -14,20 -10,4 -22,-7 -7,-7"/></g>
   </g>
   <!-- location pin -->
   <g opacity="0.3">
     <path d="M300 130 c-50 0 -90 40 -90 90 c0 65 90 150 90 150 c0 0 90 -85 90 -150 c0 -50 -40 -90 -90 -90 z" fill="none" stroke="#F7B84B" stroke-width="4"/>
-    <circle cx="300" cy="220" r="30" fill="#F7B84B" opacity="0.6"/>
+    <circle cx="300" cy="220" r="28" fill="#F7B84B" opacity="0.6"/>
   </g>
-  <!-- chat bubble -->
-  <g opacity="0.25">
-    <rect x="560" y="160" width="200" height="120" rx="18" fill="#F7B84B"/>
-    <polygon points="600,280 600,330 650,280" fill="#F7B84B"/>
-    <rect x="585" y="195" width="150" height="12" rx="6" fill="#1E3A5F"/>
-    <rect x="585" y="222" width="120" height="12" rx="6" fill="#1E3A5F"/>
+  <!-- field radio / antenna (comms) -->
+  <g transform="translate(560,170)" opacity="0.22" fill="none" stroke="#F7B84B" stroke-width="4">
+    <rect x="0" y="40" width="120" height="90" rx="8"/>
+    <line x1="95" y1="40" x2="95" y2="-20"/><circle cx="95" cy="-24" r="5" fill="#F7B84B"/>
+    <path d="M110 0 a30 30 0 0 1 18 28" />
+    <path d="M120 -14 a48 48 0 0 1 28 44" />
+    <circle cx="30" cy="85" r="14"/>
   </g>
 </svg>

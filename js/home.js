@@ -55,9 +55,9 @@ function eventCard(ev) {
 
 function placeholderEvents() {
   const items = [
-    { title: 'Annual Alumni Reunion', description: 'A grand evening of reconnecting with old friends and faculty.', location: 'Main Campus', event_date: null },
-    { title: 'Career Mentorship Meetup', description: 'Alumni guide current students through career pathways.', location: 'Online', event_date: null },
-    { title: 'Founders Day Gala', description: 'Celebrating decades of excellence and community.', location: 'Auditorium', event_date: null },
+    { title: 'Annual Old Cadets Reunion', description: 'A grand evening of nostalgia, mess dinner and reconnecting with course-mates and ustaads.', location: 'Academy Parade Ground', event_date: null },
+    { title: 'Officer Mentorship Meet', description: 'Serving officers guide cadets through SSB, NDA and academy life.', location: 'Cadets Mess', event_date: null },
+    { title: 'Founders Day & Investiture', description: 'Celebrating six decades of producing officers for the Armed Forces.', location: 'Drill Square', event_date: null },
   ]
   return items.map(eventCard).join('')
 }

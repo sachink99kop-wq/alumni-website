@@ -3,24 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ShivMaya State College Alumni — Register</title>
-  <meta name="description" content="Join the ShivMaya State College alumni network." />
+  <title>Sainik Military School Alumni — Register</title>
+  <meta name="description" content="Join the Sainik Military School alumni network." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: { extend: {
         colors: { navy: { DEFAULT: '#1E3A5F', light: '#2c5282', dark: '#15293f' }, amber: { 400: '#F7B84B', 500: '#F5A623', 600: '#d98e0f' }, lightgray: '#F8F9FA' },
-        fontFamily: { display: ['"Playfair Display"', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
+        fontFamily: { display: ['"Oswald"', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
       } },
     }
   </script>
   <style>
     html { scroll-behavior: smooth; }
     body { font-family: 'Inter', sans-serif; }
-    .font-display { font-family: 'Playfair Display', serif; }
+    .font-display { font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: .04em; }
     .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
     .fade-in.visible { opacity: 1; transform: none; }
     .bg-navy { background-color: #1E3A5F; }
@@ -35,8 +35,8 @@
     <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('assets/banners/registration.svg')"></div>
     <div class="absolute inset-0 bg-navy/55"></div>
     <div class="relative max-w-3xl mx-auto px-4 text-center">
-      <h1 class="font-display text-4xl font-bold mb-3">Join the Alumni Network</h1>
-      <p class="text-gray-200">Complete the three quick steps below to become a registered alumnus.</p>
+      <h1 class="font-display text-4xl font-bold mb-3">Enrol in the Brotherhood</h1>
+      <p class="text-gray-200">Complete the three quick steps below to join the Old Cadets' register.</p>
     </div>
   </section>
 
@@ -51,12 +51,12 @@
         <div class="h-0.5 flex-1 bg-gray-300 mx-2"></div>
         <div class="step-indicator flex-1 flex flex-col items-center" data-step="2">
           <div class="dot h-10 w-10 rounded-full grid place-items-center font-semibold bg-gray-300 text-gray-600">2</div>
-          <span class="mt-2 text-sm font-medium text-gray-500">Academic</span>
+          <span class="mt-2 text-sm font-medium text-gray-500">Cadet</span>
         </div>
         <div class="h-0.5 flex-1 bg-gray-300 mx-2"></div>
         <div class="step-indicator flex-1 flex flex-col items-center" data-step="3">
           <div class="dot h-10 w-10 rounded-full grid place-items-center font-semibold bg-gray-300 text-gray-600">3</div>
-          <span class="mt-2 text-sm font-medium text-gray-500">Professional</span>
+          <span class="mt-2 text-sm font-medium text-gray-500">Service</span>
         </div>
       </div>
 
@@ -90,25 +90,25 @@
 
         <!-- STEP 2 -->
         <div class="form-step hidden" data-step="2">
-          <h2 class="font-display text-2xl font-bold text-navy mb-6">Academic Information</h2>
+          <h2 class="font-display text-2xl font-bold text-navy mb-6">Cadet Record</h2>
           <div class="grid gap-5 sm:grid-cols-2">
             <div>
-              <label class="block text-sm font-medium mb-1">Graduation Year *</label>
-              <input name="graduation_year" type="number" min="1950" max="2030" class="inp" placeholder="e.g. 2015" />
+              <label class="block text-sm font-medium mb-1">Passing-Out Year *</label>
+              <input name="graduation_year" type="number" min="1950" max="2030" class="inp" placeholder="e.g. 2010" />
               <p class="err text-xs text-red-600 mt-1 hidden"></p>
             </div>
             <div>
-              <label class="block text-sm font-medium mb-1">Degree *</label>
-              <input name="degree" type="text" class="inp" placeholder="e.g. B.Tech" />
+              <label class="block text-sm font-medium mb-1">Course / Wing *</label>
+              <input name="degree" type="text" class="inp" placeholder="e.g. NDA / Science" />
               <p class="err text-xs text-red-600 mt-1 hidden"></p>
             </div>
             <div>
-              <label class="block text-sm font-medium mb-1">Department *</label>
-              <input name="department" type="text" class="inp" placeholder="e.g. Computer Science" />
+              <label class="block text-sm font-medium mb-1">House / Squadron *</label>
+              <input name="department" type="text" class="inp" placeholder="e.g. Pratap House" />
               <p class="err text-xs text-red-600 mt-1 hidden"></p>
             </div>
             <div>
-              <label class="block text-sm font-medium mb-1">Roll Number</label>
+              <label class="block text-sm font-medium mb-1">Cadet Number</label>
               <input name="roll_number" type="text" class="inp" />
               <p class="err text-xs text-red-600 mt-1 hidden"></p>
             </div>
@@ -117,16 +117,16 @@
 
         <!-- STEP 3 -->
         <div class="form-step hidden" data-step="3">
-          <h2 class="font-display text-2xl font-bold text-navy mb-6">Professional Information</h2>
+          <h2 class="font-display text-2xl font-bold text-navy mb-6">Service Details</h2>
           <div class="grid gap-5 sm:grid-cols-2">
             <div>
-              <label class="block text-sm font-medium mb-1">Job Title</label>
-              <input name="current_job_title" type="text" class="inp" />
+              <label class="block text-sm font-medium mb-1">Current Rank / Designation</label>
+              <input name="current_job_title" type="text" class="inp" placeholder="e.g. Major / Lt Cdr / Civilian" />
               <p class="err text-xs text-red-600 mt-1 hidden"></p>
             </div>
             <div>
-              <label class="block text-sm font-medium mb-1">Company</label>
-              <input name="current_company" type="text" class="inp" />
+              <label class="block text-sm font-medium mb-1">Service & Unit / Organisation</label>
+              <input name="current_company" type="text" class="inp" placeholder="e.g. Indian Army, 5 Gorkha Rifles" />
               <p class="err text-xs text-red-600 mt-1 hidden"></p>
             </div>
             <div>
