@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShivMaya State College Alumni — About</title>
+  <meta name="description" content="History, mission and committee of the alumni association." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: { navy: { DEFAULT: '#1E3A5F', light: '#2c5282', dark: '#15293f' }, amber: { 400: '#F7B84B', 500: '#F5A623', 600: '#d98e0f' }, lightgray: '#F8F9FA' },
+        fontFamily: { display: ['"Playfair Display"', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
+      } },
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; }
+    .font-display { font-family: 'Playfair Display', serif; }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+    .bg-navy { background-color: #1E3A5F; }
+    .text-navy { color: #1E3A5F; }
+  </style>
+</head>
+<body class="bg-white text-gray-800">
+  <div id="site-header"></div>
+
+  <section class="relative bg-navy text-white py-16 overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('assets/banners/about.svg')"></div>
+    <div class="absolute inset-0 bg-navy/55"></div>
+    <div class="relative max-w-7xl mx-auto px-4 text-center">
+      <h1 class="font-display text-4xl font-bold mb-3">About Our Association</h1>
+      <p class="text-gray-200">Six decades of friendship, mentorship and giving back.</p>
+    </div>
+  </section>
+
+  <!-- History -->
+  <section class="py-16">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-10 md:grid-cols-2 items-center">
+      <img src="https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?auto=format&fit=crop&w=800&q=60" alt="Campus" class="rounded-2xl shadow-md fade-in" />
+      <div class="fade-in">
+        <h2 class="font-display text-3xl font-bold text-navy mb-4">Our Story</h2>
+        <p class="text-gray-600 mb-4">Founded in 1962, the ShivMaya State College Alumni Association began as a small circle of graduates determined to stay connected. Over the decades it has grown into a global community of more than twelve thousand members spanning forty-two countries.</p>
+        <p class="text-gray-600">From funding scholarships to mentoring the next generation of students, our alumni continue to shape the institution they once called home. This page tells the story of who we are and where we're headed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission & Vision -->
+  <section class="py-16 bg-lightgray">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-8 md:grid-cols-2">
+      <div class="bg-white rounded-2xl shadow-sm p-8 fade-in">
+        <div class="h-12 w-12 rounded-full bg-amber-500 text-navy grid place-items-center text-2xl mb-4">🎯</div>
+        <h3 class="font-display text-2xl font-bold text-navy mb-3">Our Mission</h3>
+        <p class="text-gray-600">To foster lifelong connections among graduates, support the academic excellence of our college, and create meaningful opportunities for alumni to give back and grow together.</p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm p-8 fade-in">
+        <div class="h-12 w-12 rounded-full bg-amber-500 text-navy grid place-items-center text-2xl mb-4">🌟</div>
+        <h3 class="font-display text-2xl font-bold text-navy mb-3">Our Vision</h3>
+        <p class="text-gray-600">A vibrant, engaged global network where every alumnus feels a sense of belonging and pride, empowering students and society for generations to come.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Executive Committee -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12 fade-in">
+        <h2 class="font-display text-3xl font-bold text-navy">Executive Committee</h2>
+        <p class="text-gray-600 mt-3">The volunteers who keep our community thriving.</p>
+      </div>
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="text-center fade-in">
+          <img src="https://i.pravatar.cc/240?img=12" alt="President" class="h-32 w-32 rounded-full mx-auto object-cover shadow-md" />
+          <h3 class="font-display text-lg font-bold text-navy mt-4">Dr. Vikram Nair</h3>
+          <p class="text-amber-600 text-sm font-medium">President</p>
+        </div>
+        <div class="text-center fade-in">
+          <img src="https://i.pravatar.cc/240?img=45" alt="Vice President" class="h-32 w-32 rounded-full mx-auto object-cover shadow-md" />
+          <h3 class="font-display text-lg font-bold text-navy mt-4">Anita Deshpande</h3>
+          <p class="text-amber-600 text-sm font-medium">Vice President</p>
+        </div>
+        <div class="text-center fade-in">
+          <img src="https://i.pravatar.cc/240?img=33" alt="Secretary" class="h-32 w-32 rounded-full mx-auto object-cover shadow-md" />
+          <h3 class="font-display text-lg font-bold text-navy mt-4">Rohan Gupta</h3>
+          <p class="text-amber-600 text-sm font-medium">Secretary</p>
+        </div>
+        <div class="text-center fade-in">
+          <img src="https://i.pravatar.cc/240?img=20" alt="Treasurer" class="h-32 w-32 rounded-full mx-auto object-cover shadow-md" />
+          <h3 class="font-display text-lg font-bold text-navy mt-4">Leena Fernandes</h3>
+          <p class="text-amber-600 text-sm font-medium">Treasurer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="py-16 bg-lightgray">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12 fade-in">
+        <h2 class="font-display text-3xl font-bold text-navy">Our Journey</h2>
+      </div>
+      <ol class="relative border-l-2 border-amber-500 ml-3">
+        <li class="mb-10 ml-6 fade-in">
+          <span class="absolute -left-3 h-6 w-6 rounded-full bg-amber-500 ring-4 ring-lightgray"></span>
+          <h3 class="font-display text-xl font-bold text-navy">1962 — Foundation</h3>
+          <p class="text-gray-600">The association is established by the first graduating batch.</p>
+        </li>
+        <li class="mb-10 ml-6 fade-in">
+          <span class="absolute -left-3 h-6 w-6 rounded-full bg-amber-500 ring-4 ring-lightgray"></span>
+          <h3 class="font-display text-xl font-bold text-navy">1985 — First Global Chapter</h3>
+          <p class="text-gray-600">Alumni open the first overseas chapter, connecting members worldwide.</p>
+        </li>
+        <li class="mb-10 ml-6 fade-in">
+          <span class="absolute -left-3 h-6 w-6 rounded-full bg-amber-500 ring-4 ring-lightgray"></span>
+          <h3 class="font-display text-xl font-bold text-navy">2001 — Scholarship Fund</h3>
+          <p class="text-gray-600">The endowment fund is launched, supporting hundreds of students since.</p>
+        </li>
+        <li class="mb-10 ml-6 fade-in">
+          <span class="absolute -left-3 h-6 w-6 rounded-full bg-amber-500 ring-4 ring-lightgray"></span>
+          <h3 class="font-display text-xl font-bold text-navy">2015 — Digital Network</h3>
+          <p class="text-gray-600">An online platform connects more than 10,000 members instantly.</p>
+        </li>
+        <li class="ml-6 fade-in">
+          <span class="absolute -left-3 h-6 w-6 rounded-full bg-amber-500 ring-4 ring-lightgray"></span>
+          <h3 class="font-display text-xl font-bold text-navy">2024 — 60+ Years Strong</h3>
+          <p class="text-gray-600">Celebrating six decades with a record-breaking reunion and giving campaign.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+
+  <script src="js/common.js"></script>
+</body>
+</html>

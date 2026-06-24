@@ -1,0 +1,23 @@
+<svg viewBox="0 0 1600 450" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#15293f"/><stop offset="1" stop-color="#1E3A5F"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="450" fill="url(#g)"/>
+  <!-- classical columned building -->
+  <g fill="#F5A623" opacity="0.15">
+    <polygon points="1200,120 1500,120 1350,60"/>
+    <rect x="1200" y="120" width="300" height="22"/>
+    <rect x="1215" y="150" width="24" height="200"/><rect x="1275" y="150" width="24" height="200"/>
+    <rect x="1335" y="150" width="24" height="200"/><rect x="1395" y="150" width="24" height="200"/>
+    <rect x="1455" y="150" width="24" height="200"/>
+    <rect x="1190" y="352" width="320" height="20"/>
+  </g>
+  <!-- open book -->
+  <g fill="none" stroke="#F7B84B" stroke-width="3" opacity="0.3">
+    <path d="M180 300 Q280 260 380 300 L380 200 Q280 165 180 200 Z"/>
+    <path d="M380 300 Q480 260 580 300 L580 200 Q480 165 380 200 Z"/>
+    <line x1="380" y1="200" x2="380" y2="300"/>
+  </g>
+</svg>

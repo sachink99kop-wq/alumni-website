@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShivMaya State College Alumni — Gallery</title>
+  <meta name="description" content="Memories from reunions, sports, convocations and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: { navy: { DEFAULT: '#1E3A5F', light: '#2c5282', dark: '#15293f' }, amber: { 400: '#F7B84B', 500: '#F5A623', 600: '#d98e0f' }, lightgray: '#F8F9FA' },
+        fontFamily: { display: ['"Playfair Display"', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
+      } },
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; }
+    .font-display { font-family: 'Playfair Display', serif; }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+    .bg-navy { background-color: #1E3A5F; }
+    .text-navy { color: #1E3A5F; }
+    .filter-btn.active { background:#1E3A5F; color:#fff; }
+    /* masonry via CSS columns */
+    .masonry { column-gap: 1rem; }
+    @media (min-width:640px){ .masonry { columns: 2; } }
+    @media (min-width:1024px){ .masonry { columns: 3; } }
+    .masonry > * { break-inside: avoid; margin-bottom: 1rem; }
+  </style>
+</head>
+<body class="bg-white text-gray-800">
+  <div id="site-header"></div>
+
+  <section class="relative bg-navy text-white py-16 overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('assets/banners/gallery.svg')"></div>
+    <div class="absolute inset-0 bg-navy/55"></div>
+    <div class="relative max-w-7xl mx-auto px-4 text-center">
+      <h1 class="font-display text-4xl font-bold mb-3">Gallery</h1>
+      <p class="text-gray-200">A look back at the moments that bring us together.</p>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Filters -->
+      <div id="filters" class="flex flex-wrap justify-center gap-2 mb-10">
+        <button class="filter-btn active px-5 py-2 rounded-full border border-gray-300 font-medium" data-cat="all">All</button>
+        <button class="filter-btn px-5 py-2 rounded-full border border-gray-300 font-medium" data-cat="reunion">Reunion</button>
+        <button class="filter-btn px-5 py-2 rounded-full border border-gray-300 font-medium" data-cat="sports">Sports</button>
+        <button class="filter-btn px-5 py-2 rounded-full border border-gray-300 font-medium" data-cat="convocation">Convocation</button>
+        <button class="filter-btn px-5 py-2 rounded-full border border-gray-300 font-medium" data-cat="cultural">Cultural</button>
+      </div>
+
+      <div id="galleryLoader" class="flex justify-center py-16"></div>
+      <div id="galleryGrid" class="masonry"></div>
+      <p id="galleryEmpty" class="hidden text-center text-gray-500 py-16">No images found.</p>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="hidden fixed inset-0 z-[95] bg-black/90 flex items-center justify-center p-4">
+    <button id="lbClose" class="absolute top-5 right-5 text-white/80 hover:text-white" aria-label="Close">
+      <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <button id="lbPrev" class="absolute left-4 text-white/80 hover:text-white" aria-label="Previous">
+      <svg class="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+    </button>
+    <div class="max-w-4xl max-h-[85vh] text-center">
+      <img id="lbImg" src="" alt="" class="max-h-[78vh] mx-auto rounded-lg object-contain" />
+      <p id="lbCaption" class="text-white mt-3"></p>
+    </div>
+    <button id="lbNext" class="absolute right-4 text-white/80 hover:text-white" aria-label="Next">
+      <svg class="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+
+  <div id="site-footer"></div>
+
+  <script src="js/common.js"></script>
+  <script type="module" src="js/gallery.js"></script>
+</body>
+</html>

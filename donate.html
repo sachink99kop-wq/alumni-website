@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShivMaya State College Alumni — Donate</title>
+  <meta name="description" content="Give back to your alma mater." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: { navy: { DEFAULT: '#1E3A5F', light: '#2c5282', dark: '#15293f' }, amber: { 400: '#F7B84B', 500: '#F5A623', 600: '#d98e0f' }, lightgray: '#F8F9FA' },
+        fontFamily: { display: ['"Playfair Display"', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
+      } },
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; }
+    .font-display { font-family: 'Playfair Display', serif; }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+    .bg-navy { background-color: #1E3A5F; }
+    .text-navy { color: #1E3A5F; }
+    .amt-btn.active { background:#F5A623; color:#1E3A5F; border-color:#F5A623; }
+  </style>
+</head>
+<body class="bg-white text-gray-800">
+  <div id="site-header"></div>
+
+  <section class="relative bg-navy text-white py-16 overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('assets/banners/donate.svg')"></div>
+    <div class="absolute inset-0 bg-navy/55"></div>
+    <div class="relative max-w-3xl mx-auto px-4 text-center">
+      <h1 class="font-display text-4xl font-bold mb-3">Give Back</h1>
+      <p class="text-gray-200">Your generosity funds scholarships, facilities, and the future of our students.</p>
+    </div>
+  </section>
+
+  <section class="py-12 bg-lightgray">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-10 lg:grid-cols-5">
+      <!-- Form -->
+      <div class="lg:col-span-3">
+        <form id="donateForm" class="bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-5 fade-in" novalidate>
+          <h2 class="font-display text-2xl font-bold text-navy">Donation Details</h2>
+          <p class="text-xs text-gray-500 -mt-3">This is a record-keeping form, not a live payment gateway.</p>
+
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label class="block text-sm font-medium mb-1">Name *</label>
+              <input name="donor_name" type="text" class="inp" />
+              <p class="err text-xs text-red-600 mt-1 hidden"></p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Email *</label>
+              <input name="email" type="email" class="inp" />
+              <p class="err text-xs text-red-600 mt-1 hidden"></p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Phone</label>
+              <input name="phone" type="tel" class="inp" />
+              <p class="err text-xs text-red-600 mt-1 hidden"></p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Purpose *</label>
+              <select name="purpose" class="inp">
+                <option value="">Select…</option>
+                <option>Scholarship Fund</option>
+                <option>Infrastructure</option>
+                <option>General</option>
+              </select>
+              <p class="err text-xs text-red-600 mt-1 hidden"></p>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-2">Amount (₹) *</label>
+            <div class="flex flex-wrap gap-2 mb-3">
+              <button type="button" class="amt-btn px-5 py-2 rounded-full border border-gray-300 font-semibold" data-amt="500">₹500</button>
+              <button type="button" class="amt-btn px-5 py-2 rounded-full border border-gray-300 font-semibold" data-amt="1000">₹1000</button>
+              <button type="button" class="amt-btn px-5 py-2 rounded-full border border-gray-300 font-semibold" data-amt="2500">₹2500</button>
+              <button type="button" class="amt-btn px-5 py-2 rounded-full border border-gray-300 font-semibold" data-amt="5000">₹5000</button>
+            </div>
+            <input name="amount" type="number" min="1" step="1" class="inp" placeholder="Or enter a custom amount" />
+            <p class="err text-xs text-red-600 mt-1 hidden"></p>
+          </div>
+
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label class="block text-sm font-medium mb-1">Payment Method *</label>
+              <select name="payment_method" class="inp">
+                <option value="">Select…</option>
+                <option>UPI</option>
+                <option>Bank Transfer</option>
+                <option>Card</option>
+              </select>
+              <p class="err text-xs text-red-600 mt-1 hidden"></p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Transaction ID</label>
+              <input name="transaction_id" type="text" class="inp" placeholder="Reference from your payment" />
+              <p class="err text-xs text-red-600 mt-1 hidden"></p>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1">Message</label>
+            <textarea name="message" rows="3" class="inp" placeholder="A note with your gift (optional)"></textarea>
+          </div>
+
+          <p class="text-xs text-gray-500 flex items-start gap-1.5">
+            <svg class="h-4 w-4 mt-0.5 flex-shrink-0 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Your name, amount and purpose may appear on our public Donor Recognition Wall. Enter <strong>"Anonymous"</strong> as your name if you'd prefer to give privately.
+          </p>
+
+          <button type="submit" id="donateBtn" class="px-8 py-3 rounded-full bg-amber-500 text-navy font-semibold hover:bg-amber-400 transition-colors inline-flex items-center gap-2">Submit Donation</button>
+        </form>
+
+        <!-- Success -->
+        <div id="donateSuccess" class="hidden bg-white rounded-2xl shadow-sm p-8 text-center mt-0">
+          <div class="h-16 w-16 rounded-full bg-green-100 grid place-items-center mx-auto mb-5">
+            <svg class="h-8 w-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <h2 class="font-display text-2xl font-bold text-navy mb-2">Thank you for your generosity! 🙏</h2>
+          <p class="text-gray-600">Your donation has been recorded.</p>
+          <p class="mt-3 text-sm text-gray-500">Donation ID</p>
+          <p id="donationId" class="font-mono text-navy font-semibold break-all"></p>
+          <button id="donateAgain" class="mt-6 px-6 py-3 rounded-full bg-navy text-white font-semibold hover:bg-navy-light">Make another donation</button>
+        </div>
+      </div>
+
+      <!-- Recognition wall -->
+      <aside class="lg:col-span-2">
+        <div class="bg-navy text-white rounded-2xl shadow-sm p-6 sticky top-20">
+          <h3 class="font-display text-xl font-bold mb-4">Donor Recognition Wall</h3>
+          <p class="text-gray-300 text-sm mb-4">Our heartfelt thanks to recent contributors.</p>
+          <div id="donorWall" class="space-y-3"></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+
+  <style>
+    .inp { width:100%; padding:.6rem .9rem; border:1px solid #d1d5db; border-radius:.6rem; outline:none; transition:border-color .15s, box-shadow .15s; background:#fff; }
+    .inp:focus { border-color:#F5A623; box-shadow:0 0 0 3px rgba(245,166,35,.25); }
+  </style>
+
+  <script src="js/common.js"></script>
+  <script type="module" src="js/donate.js"></script>
+</body>
+</html>

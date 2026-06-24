@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShivMaya State College Alumni — Events</title>
+  <meta name="description" content="Upcoming and past alumni events." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: { navy: { DEFAULT: '#1E3A5F', light: '#2c5282', dark: '#15293f' }, amber: { 400: '#F7B84B', 500: '#F5A623', 600: '#d98e0f' }, lightgray: '#F8F9FA' },
+        fontFamily: { display: ['"Playfair Display"', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
+      } },
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; }
+    .font-display { font-family: 'Playfair Display', serif; }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+    .bg-navy { background-color: #1E3A5F; }
+    .text-navy { color: #1E3A5F; }
+  </style>
+</head>
+<body class="bg-lightgray text-gray-800">
+  <div id="site-header"></div>
+
+  <section class="relative bg-navy text-white py-16 overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('assets/banners/events.svg')"></div>
+    <div class="absolute inset-0 bg-navy/55"></div>
+    <div class="relative max-w-7xl mx-auto px-4 text-center">
+      <h1 class="font-display text-4xl font-bold mb-3">Alumni Events</h1>
+      <p class="text-gray-200">Reunions, talks, and celebrations — find your next gathering.</p>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Tabs -->
+      <div class="flex justify-center gap-2 mb-10">
+        <button class="tab-btn px-6 py-2.5 rounded-full font-semibold bg-amber-500 text-navy" data-tab="upcoming">Upcoming</button>
+        <button class="tab-btn px-6 py-2.5 rounded-full font-semibold bg-white text-navy border border-gray-200" data-tab="past">Past</button>
+      </div>
+
+      <div id="eventsLoader" class="flex justify-center py-16"></div>
+      <div id="eventsGrid" class="grid gap-8 md:grid-cols-2 lg:grid-cols-3"></div>
+      <p id="eventsEmpty" class="hidden text-center text-gray-500 py-16">No events in this category yet. Check back soon!</p>
+    </div>
+  </section>
+
+  <!-- Registration modal -->
+  <div id="eventModal" class="hidden fixed inset-0 z-[90] bg-black/50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-md p-6 sm:p-8 relative">
+      <button id="modalClose" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700" aria-label="Close">
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      <h3 class="font-display text-2xl font-bold text-navy mb-1">Register for Event</h3>
+      <p id="modalEventTitle" class="text-amber-600 font-medium mb-6"></p>
+      <form id="eventRegForm" class="space-y-4" novalidate>
+        <input type="hidden" name="event_id" />
+        <div>
+          <label class="block text-sm font-medium mb-1">Your Name *</label>
+          <input name="attendee_name" type="text" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30" />
+          <p class="err text-xs text-red-600 mt-1 hidden"></p>
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Your Email *</label>
+          <input name="attendee_email" type="email" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30" />
+          <p class="err text-xs text-red-600 mt-1 hidden"></p>
+        </div>
+        <button type="submit" id="eventRegBtn" class="w-full py-3 rounded-full bg-amber-500 text-navy font-semibold hover:bg-amber-400 transition-colors inline-flex items-center justify-center gap-2">Confirm Registration</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="site-footer"></div>
+
+  <script src="js/common.js"></script>
+  <script type="module" src="js/events.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.log
+
+# Dependency dirs (none used, but just in case)
+node_modules/
+
+# Local env files — keep real secrets out of git
+.env
+.env.*

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShivMaya State College Alumni — Register</title>
+  <meta name="description" content="Join the ShivMaya State College alumni network." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: { navy: { DEFAULT: '#1E3A5F', light: '#2c5282', dark: '#15293f' }, amber: { 400: '#F7B84B', 500: '#F5A623', 600: '#d98e0f' }, lightgray: '#F8F9FA' },
+        fontFamily: { display: ['"Playfair Display"', 'serif'], sans: ['Inter', 'system-ui', 'sans-serif'] },
+      } },
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; }
+    .font-display { font-family: 'Playfair Display', serif; }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+    .bg-navy { background-color: #1E3A5F; }
+    .text-navy { color: #1E3A5F; }
+    .field-error { border-color: #dc2626 !important; }
+  </style>
+</head>
+<body class="bg-lightgray text-gray-800">
+  <div id="site-header"></div>
+
+  <section class="relative bg-navy text-white py-16 overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('assets/banners/registration.svg')"></div>
+    <div class="absolute inset-0 bg-navy/55"></div>
+    <div class="relative max-w-3xl mx-auto px-4 text-center">
+      <h1 class="font-display text-4xl font-bold mb-3">Join the Alumni Network</h1>
+      <p class="text-gray-200">Complete the three quick steps below to become a registered alumnus.</p>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="max-w-3xl mx-auto px-4">
+      <!-- Progress -->
+      <div id="progressBar" class="flex items-center justify-between mb-10">
+        <div class="step-indicator flex-1 flex flex-col items-center" data-step="1">
+          <div class="dot h-10 w-10 rounded-full grid place-items-center font-semibold bg-amber-500 text-navy">1</div>
+          <span class="mt-2 text-sm font-medium text-navy">Personal</span>
+        </div>
+        <div class="h-0.5 flex-1 bg-gray-300 mx-2"></div>
+        <div class="step-indicator flex-1 flex flex-col items-center" data-step="2">
+          <div class="dot h-10 w-10 rounded-full grid place-items-center font-semibold bg-gray-300 text-gray-600">2</div>
+          <span class="mt-2 text-sm font-medium text-gray-500">Academic</span>
+        </div>
+        <div class="h-0.5 flex-1 bg-gray-300 mx-2"></div>
+        <div class="step-indicator flex-1 flex flex-col items-center" data-step="3">
+          <div class="dot h-10 w-10 rounded-full grid place-items-center font-semibold bg-gray-300 text-gray-600">3</div>
+          <span class="mt-2 text-sm font-medium text-gray-500">Professional</span>
+        </div>
+      </div>
+
+      <form id="regForm" class="bg-white rounded-2xl shadow-sm p-6 sm:p-10" novalidate>
+        <!-- STEP 1 -->
+        <div class="form-step" data-step="1">
+          <h2 class="font-display text-2xl font-bold text-navy mb-6">Personal Information</h2>
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div class="sm:col-span-2">
+              <label class="block text-sm font-medium mb-1">Full Name *</label>
+              <input name="full_name" type="text" class="inp" />
+              <p class="err text-xs text-red-600 mt-1 hidden"></p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Email *</label>
+              <input name="email" type="email" class="inp" />
+              <p class="err text-xs text-red-600 mt-1 hidden"></p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Phone</label>
+              <input name="phone" type="tel" class="inp" />
+              <p class="err text-xs text-red-600 mt-1 hidden"></p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Date of Birth</label>
+              <input name="dob" type="date" class="inp" />
+              <p class="err text-xs text-red-600 mt-1 hidden"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="form-step hidden" data-step="2">
+          <h2 class="font-display text-2xl font-bold text-navy mb-6">Academic Information</h2>
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label class="block text-sm font-medium mb-1">Graduation Year *</label>
+              <input name="graduation_year" type="number" min="1950" max="2030" class="inp" placeholder="e.g. 2015" />
+              <p class="err text-xs text-red-600 mt-1 hidden"></p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Degree *</label>
+              <input name="degree" type="text" class="inp" placeholder="e.g. B.Tech" />
+              <p class="err text-xs text-red-600 mt-1 hidden"></p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Department *</label>
+              <input name="department" type="text" class="inp" placeholder="e.g. Computer Science" />
+              <p class="err text-xs text-red-600 mt-1 hidden"></p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Roll Number</label>
+              <input name="roll_number" type="text" class="inp" />
+              <p class="err text-xs text-red-600 mt-1 hidden"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="form-step hidden" data-step="3">
+          <h2 class="font-display text-2xl font-bold text-navy mb-6">Professional Information</h2>
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label class="block text-sm font-medium mb-1">Job Title</label>
+              <input name="current_job_title" type="text" class="inp" />
+              <p class="err text-xs text-red-600 mt-1 hidden"></p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Company</label>
+              <input name="current_company" type="text" class="inp" />
+              <p class="err text-xs text-red-600 mt-1 hidden"></p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">City</label>
+              <input name="city" type="text" class="inp" />
+              <p class="err text-xs text-red-600 mt-1 hidden"></p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Country</label>
+              <input name="country" type="text" class="inp" />
+              <p class="err text-xs text-red-600 mt-1 hidden"></p>
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block text-sm font-medium mb-1">LinkedIn URL</label>
+              <input name="linkedin_url" type="url" class="inp" placeholder="https://linkedin.com/in/…" />
+              <p class="err text-xs text-red-600 mt-1 hidden"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nav buttons -->
+        <div class="flex justify-between mt-8">
+          <button type="button" id="prevBtn" class="px-6 py-3 rounded-full border-2 border-navy text-navy font-semibold hover:bg-navy hover:text-white transition-colors invisible">Back</button>
+          <button type="button" id="nextBtn" class="px-8 py-3 rounded-full bg-amber-500 text-navy font-semibold hover:bg-amber-400 transition-colors">Next</button>
+          <button type="submit" id="submitBtn" class="px-8 py-3 rounded-full bg-navy text-white font-semibold hover:bg-navy-light transition-colors hidden inline-flex items-center gap-2">Submit Registration</button>
+        </div>
+      </form>
+
+      <!-- Success panel -->
+      <div id="successPanel" class="hidden bg-white rounded-2xl shadow-sm p-8 sm:p-12 text-center">
+        <div class="h-16 w-16 rounded-full bg-green-100 grid place-items-center mx-auto mb-5">
+          <svg class="h-8 w-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <h2 class="font-display text-3xl font-bold text-navy mb-2">Welcome to the family!</h2>
+        <p class="text-gray-600 mb-6">Your registration was received successfully. Here's a summary:</p>
+        <div id="summary" class="text-left max-w-md mx-auto bg-lightgray rounded-xl p-5 text-sm space-y-1"></div>
+        <a href="index.html" class="inline-block mt-8 px-6 py-3 rounded-full bg-amber-500 text-navy font-semibold hover:bg-amber-400">Back to Home</a>
+      </div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+
+  <style>
+    .inp { width:100%; padding:.6rem .9rem; border:1px solid #d1d5db; border-radius:.6rem; outline:none; transition:border-color .15s, box-shadow .15s; }
+    .inp:focus { border-color:#F5A623; box-shadow:0 0 0 3px rgba(245,166,35,.25); }
+  </style>
+
+  <script src="js/common.js"></script>
+  <script type="module" src="js/registration.js"></script>
+</body>
+</html>

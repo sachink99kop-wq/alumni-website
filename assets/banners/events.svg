@@ -1,0 +1,26 @@
+<svg viewBox="0 0 1600 450" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#15293f"/><stop offset="1" stop-color="#1E3A5F"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="450" fill="url(#g)"/>
+  <!-- calendar -->
+  <g opacity="0.2">
+    <rect x="1280" y="130" width="200" height="190" rx="14" fill="#F5A623"/>
+    <rect x="1280" y="130" width="200" height="44" rx="14" fill="#d98e0f"/>
+    <rect x="1315" y="115" width="14" height="38" rx="6" fill="#F7B84B"/>
+    <rect x="1431" y="115" width="14" height="38" rx="6" fill="#F7B84B"/>
+    <g fill="#1E3A5F"><rect x="1300" y="195" width="26" height="26"/><rect x="1340" y="195" width="26" height="26"/><rect x="1380" y="195" width="26" height="26"/><rect x="1420" y="195" width="26" height="26"/>
+    <rect x="1300" y="235" width="26" height="26"/><rect x="1340" y="235" width="26" height="26"/><rect x="1380" y="235" width="26" height="26"/><rect x="1420" y="235" width="26" height="26"/></g>
+  </g>
+  <!-- confetti -->
+  <g opacity="0.4">
+    <rect x="200" y="120" width="16" height="16" fill="#F7B84B" transform="rotate(20 208 128)"/>
+    <rect x="320" y="200" width="14" height="14" fill="#F5A623" transform="rotate(-15 327 207)"/>
+    <circle cx="260" cy="300" r="8" fill="#F7B84B"/>
+    <rect x="430" y="150" width="16" height="16" fill="#F5A623" transform="rotate(35 438 158)"/>
+    <circle cx="500" cy="280" r="7" fill="#F7B84B"/>
+    <rect x="600" y="120" width="14" height="14" fill="#F5A623" transform="rotate(-25 607 127)"/>
+  </g>
+</svg>
