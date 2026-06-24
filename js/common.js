@@ -51,7 +51,13 @@ function buildHeader() {
           <span class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-amber-500 text-navy font-bold font-display">S</span>
           <span class="font-display text-white text-lg font-bold tracking-wide hidden sm:block">${COLLEGE_NAME} <span class="text-amber-500">Alumni</span></span>
         </a>
-        <div class="hidden md:flex items-center gap-1">${links}</div>
+        <div class="hidden md:flex items-center gap-1">
+          ${links}
+          <a href="admin.html" class="ml-2 inline-flex items-center gap-1.5 px-3 py-2 rounded-full border border-amber-500 text-amber-500 text-sm font-semibold hover:bg-amber-500 hover:text-navy transition-colors">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0-1.66 1.34-3 3-3s3 1.34 3 3-1.34 3-3 3m-3 5H6a2 2 0 01-2-2v-1a4 4 0 014-4h2m4-9a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            Admin Login
+          </a>
+        </div>
         <button id="mobileMenuBtn" aria-label="Toggle menu"
           class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-white/10">
           <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -60,17 +66,30 @@ function buildHeader() {
         </button>
       </div>
     </nav>
-    <div id="mobileMenu" class="md:hidden hidden bg-navy border-t border-white/10">${mobileLinks}</div>
+    <div id="mobileMenu" class="md:hidden hidden bg-navy border-t border-white/10">
+      <p class="px-4 pt-3 pb-1 text-xs font-display font-semibold uppercase tracking-wider text-amber-500">Quick Links</p>
+      ${mobileLinks}
+      <a href="admin.html" class="flex items-center gap-2 px-4 py-3 text-base font-semibold text-amber-500 hover:text-amber-400">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0-1.66 1.34-3 3-3s3 1.34 3 3-1.34 3-3 3m-3 5H6a2 2 0 01-2-2v-1a4 4 0 014-4h2m4-9a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        Admin Login
+      </a>
+    </div>
   </header>`
 }
 
 // ---------- Footer ----------
 function buildFooter() {
   const year = new Date().getFullYear()
-  const quick = NAV_LINKS.map(
-    (l) =>
-      `<li><a href="${l.href}" class="text-gray-300 hover:text-amber-400 transition-colors">${l.label}</a></li>`
-  ).join('')
+  const linkItems = (links) =>
+    links
+      .map(
+        (l) =>
+          `<li><a href="${l.href}" class="text-gray-300 hover:text-amber-400 transition-colors">${l.label}</a></li>`
+      )
+      .join('')
+  // Split the nav into two Quick Links columns
+  const quickCol1 = linkItems(NAV_LINKS.slice(0, 4)) // Home, About, Gallery, Events
+  const quickCol2 = linkItems(NAV_LINKS.slice(4)) //    Donate, Register, Contact
 
   const socials = [
     { label: 'Facebook', d: 'M22 12a10 10 0 10-11.5 9.9v-7H8v-2.9h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6v1.9H17l-.4 2.9h-2.1v7A10 10 0 0022 12z' },
@@ -87,7 +106,7 @@ function buildFooter() {
 
   return `
   <footer class="bg-navy text-white mt-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid gap-8 md:grid-cols-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid gap-8 md:grid-cols-3">
       <div>
         <div class="flex items-center gap-2 mb-3">
           <span class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-amber-500 text-navy font-bold font-display">S</span>
@@ -95,20 +114,33 @@ function buildFooter() {
         </div>
         <p class="text-gray-300 text-sm">Connecting generations of graduates. Stay involved, give back, and grow together.</p>
       </div>
-      <div>
-        <h4 class="font-display font-semibold mb-3 text-amber-500">Quick Links</h4>
-        <ul class="space-y-2 text-sm">${quick}</ul>
+      <div class="grid grid-cols-2 gap-6">
+        <div>
+          <h4 class="font-display font-semibold mb-3 text-amber-500">Quick Links</h4>
+          <ul class="space-y-2 text-sm">${quickCol1}</ul>
+        </div>
+        <div>
+          <h4 class="font-display font-semibold mb-3 text-amber-500">Quick Links</h4>
+          <ul class="space-y-2 text-sm">${quickCol2}</ul>
+        </div>
       </div>
       <div>
         <h4 class="font-display font-semibold mb-3 text-amber-500">Contact</h4>
-        <ul class="space-y-2 text-sm text-gray-300">
-          <li>123 University Avenue, Belgaum, Karnataka 590008, India</li>
-          <li>+91 98765 43210</li>
-          <li>alumni@shivmayastatescollege.edu</li>
+        <ul class="space-y-2.5 text-sm text-gray-300">
+          <li class="flex items-start gap-2.5">
+            <svg class="h-4 w-4 mt-0.5 flex-shrink-0 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <span>123 University Avenue, Belgaum, Karnataka 590008, India</span>
+          </li>
+          <li class="flex items-center gap-2.5">
+            <svg class="h-4 w-4 flex-shrink-0 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            <a href="tel:+919876543210" class="hover:text-amber-400 transition-colors">+91 98765 43210</a>
+          </li>
+          <li class="flex items-center gap-2.5">
+            <svg class="h-4 w-4 flex-shrink-0 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <a href="mailto:alumni@shivmayastatescollege.edu" class="hover:text-amber-400 transition-colors break-all">alumni@shivmayastatescollege.edu</a>
+          </li>
         </ul>
-      </div>
-      <div>
-        <h4 class="font-display font-semibold mb-3 text-amber-500">Follow Us</h4>
+        <h4 class="font-display font-semibold mb-3 mt-6 text-amber-500">Follow Us</h4>
         <div class="flex gap-3">${socials}</div>
       </div>
     </div>
