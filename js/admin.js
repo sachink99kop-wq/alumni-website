@@ -42,6 +42,7 @@ function enterDashboard(session) {
   if (who && session?.user?.email) who.textContent = session.user.email
   loadGallery()
   loadEvents()
+  loadHof()
   initReports()
 }
 
@@ -218,6 +219,69 @@ async function loadEvents() {
       b.addEventListener('click', () => removeRow('events', b.dataset.id, loadEvents)))
   } catch (err) {
     list.innerHTML = `<p class="text-sm text-red-500">${err.message}</p>`
+  }
+}
+
+// ---------- Hall of Fame / Spotlight ----------
+const hofForm = document.getElementById('hofForm')
+hofForm.addEventListener('submit', async (e) => {
+  e.preventDefault()
+  const nameInput = hofForm.elements['name']
+  clearFieldError(nameInput)
+  if (!nameInput.value.trim()) { fieldError(nameInput, 'Name is required.'); return }
+
+  const btn = document.getElementById('hofBtn')
+  btn.disabled = true
+  const orig = btn.innerHTML
+  btn.innerHTML = `${window.spinner('h-5 w-5')} <span>Saving…</span>`
+  try {
+    let photoUrl = null
+    const file = hofForm.elements['file'].files[0]
+    if (file) photoUrl = await uploadImage(file)
+
+    const { error } = await supabase.from('honourees').insert([{
+      name: nameInput.value.trim(),
+      award: hofForm.elements['award'].value.trim() || null,
+      description: hofForm.elements['description'].value.trim() || null,
+      photo_url: photoUrl,
+      is_spotlight: hofForm.elements['is_spotlight'].checked,
+    }])
+    if (error) throw error
+    window.showToast('Added to Hall of Fame!', 'success')
+    hofForm.reset()
+    loadHof()
+  } catch (err) {
+    console.error(err)
+    window.showToast(err.message || 'Could not save entry.', 'error')
+  } finally {
+    btn.disabled = false
+    btn.innerHTML = orig
+  }
+})
+
+async function loadHof() {
+  const list = document.getElementById('hofList')
+  list.innerHTML = `<div class="col-span-full flex justify-center py-4">${window.spinner('h-6 w-6')}</div>`
+  try {
+    const { data, error } = await supabase
+      .from('honourees')
+      .select('id, name, award, photo_url, is_spotlight')
+      .order('created_at', { ascending: false })
+    if (error) throw error
+    if (!data || !data.length) { list.innerHTML = '<p class="col-span-full text-sm text-gray-400">No entries yet.</p>'; return }
+    list.innerHTML = data.map((h) => `
+      <div class="flex items-center gap-3 bg-lightgray rounded-lg p-2.5">
+        <img src="${h.photo_url || ''}" onerror="this.style.visibility='hidden'" class="h-10 w-10 rounded-full object-cover bg-white shrink-0" alt="" />
+        <div class="min-w-0 flex-1">
+          <p class="text-sm font-medium text-navy truncate">${esc(h.name)}</p>
+          <p class="text-xs text-gray-500 truncate">${esc(h.award || '')}${h.is_spotlight ? ' · ★ Spotlight' : ''}</p>
+        </div>
+        <button data-id="${h.id}" class="del-hof text-red-500 hover:text-red-700 text-xs font-semibold shrink-0">Delete</button>
+      </div>`).join('')
+    list.querySelectorAll('.del-hof').forEach((b) =>
+      b.addEventListener('click', () => removeRow('honourees', b.dataset.id, loadHof)))
+  } catch (err) {
+    list.innerHTML = `<p class="col-span-full text-sm text-red-500">${esc(err.message)}</p>`
   }
 }
 

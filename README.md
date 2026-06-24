@@ -166,6 +166,18 @@ create table if not exists newsletter_subscribers (
   email text not null unique,
   created_at timestamptz default now()
 );
+
+-- 8. Honourees — Alumni Spotlight + Hall of Fame (home page)
+create table if not exists honourees (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  award text,                 -- e.g. 'Param Vir Chakra'
+  description text,           -- short story (shown in Spotlight)
+  photo_url text,
+  is_spotlight boolean default false,  -- feature in the top-3 Spotlight
+  sort_order int default 0,
+  created_at timestamptz default now()
+);
 ```
 
 ---
@@ -276,6 +288,11 @@ create policy "auth delete events"  on events         for delete to authenticate
 create policy "public read images"  on storage.objects for select using ( bucket_id = 'images' );
 create policy "auth upload images"  on storage.objects for insert to authenticated with check ( bucket_id = 'images' );
 create policy "auth delete images"  on storage.objects for delete to authenticated using ( bucket_id = 'images' );
+
+-- Honourees (Spotlight + Hall of Fame): public can view, admins manage
+create policy "public read honourees" on honourees for select to anon using (true);
+create policy "auth insert honourees" on honourees for insert to authenticated with check (true);
+create policy "auth delete honourees" on honourees for delete to authenticated using (true);
 
 -- Reports: only authenticated admins can READ the submitted data
 create policy "auth read alumni"     on alumni_registrations   for select to authenticated using (true);

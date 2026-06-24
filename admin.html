@@ -136,6 +136,41 @@
         <div id="eventList" class="space-y-2"></div>
       </section>
 
+      <!-- HALL OF FAME / HEROES -->
+      <section class="bg-white rounded-2xl shadow-sm p-6 sm:p-8 lg:col-span-2">
+        <h2 class="font-display text-2xl font-bold text-navy mb-5">Hall of Fame &amp; Alumni Spotlight</h2>
+        <form id="hofForm" class="grid gap-4 sm:grid-cols-2" novalidate>
+          <div>
+            <label class="block text-sm font-medium mb-1">Name &amp; Honours *</label>
+            <input name="name" type="text" class="inp" placeholder="e.g. Capt R. S. Salaria, PVC (Posthumous)" />
+            <p class="err text-xs text-red-600 mt-1 hidden"></p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Award / Decoration</label>
+            <input name="award" type="text" class="inp" placeholder="e.g. Param Vir Chakra" />
+          </div>
+          <div class="sm:col-span-2">
+            <label class="block text-sm font-medium mb-1">Short Story (shown only in Spotlight)</label>
+            <textarea name="description" rows="2" class="inp" placeholder="A line or two about their valour…"></textarea>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Photo</label>
+            <input name="file" type="file" accept="image/*" class="inp py-2" />
+          </div>
+          <div class="flex items-end gap-4">
+            <label class="flex items-center gap-2 text-sm">
+              <input name="is_spotlight" type="checkbox" class="h-4 w-4 accent-amber-500" /> Feature in Alumni Spotlight (top 3)
+            </label>
+          </div>
+          <div class="sm:col-span-2">
+            <button type="submit" id="hofBtn" class="px-6 py-3 rounded-full bg-amber-500 text-navy font-semibold hover:bg-amber-400 transition-colors inline-flex items-center gap-2">Add to Hall of Fame</button>
+          </div>
+        </form>
+
+        <h3 class="font-semibold text-navy mt-8 mb-3 text-sm uppercase tracking-wide">Existing entries</h3>
+        <div id="hofList" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+      </section>
+
       <!-- REPORTS -->
       <section class="bg-white rounded-2xl shadow-sm p-6 sm:p-8 lg:col-span-2">
         <div class="flex flex-wrap items-center justify-between gap-3 mb-5">

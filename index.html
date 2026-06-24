@@ -36,6 +36,14 @@
     .fade-in.visible { opacity: 1; transform: none; }
     .bg-navy { background-color: #1E3A5F; }
     .text-navy { color: #1E3A5F; }
+    /* Hall of Fame auto-scrolling marquee */
+    #hofRow { -ms-overflow-style: none; scrollbar-width: none; }
+    #hofRow::-webkit-scrollbar { display: none; }
+    .hof-track { display: flex; gap: 1.25rem; width: max-content; }
+    .hof-track.hof-animate { animation: hofScroll 45s linear infinite; }
+    #hofRow:hover .hof-track.hof-animate { animation-play-state: paused; }
+    @keyframes hofScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) { .hof-track.hof-animate { animation: none; } }
   </style>
 </head>
 <body class="bg-white text-gray-800">
@@ -115,6 +123,32 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ALUMNI SPOTLIGHT -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12 fade-in">
+        <p class="text-amber-500 font-semibold tracking-widest uppercase mb-2">Alumni Spotlight</p>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-navy">Remarkable People, Remarkable Stories</h2>
+      </div>
+      <div id="spotlightGrid" class="grid gap-8 md:grid-cols-3">
+        <div class="col-span-3 flex justify-center py-10" id="spotlightLoader"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HALL OF FAME -->
+  <section class="py-20 bg-navy text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12 fade-in">
+        <p class="text-amber-500 font-semibold tracking-widest uppercase mb-2">Our Heroes</p>
+        <h2 class="font-display text-3xl md:text-4xl font-bold">Hall of Fame</h2>
+        <p class="text-gray-300 mt-3">Old cadets who brought glory to the nation.</p>
+      </div>
+      <div id="hofLoader" class="flex justify-center py-10"></div>
+      <div id="hofRow" class="overflow-hidden pb-4"></div>
     </div>
   </section>
 
