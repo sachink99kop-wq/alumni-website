@@ -137,28 +137,109 @@ galleryForm.addEventListener('submit', async (e) => {
   }
 })
 
-async function loadGallery() {
-  const list = document.getElementById('galleryList')
-  list.innerHTML = `<div class="col-span-3 flex justify-center py-4">${window.spinner('h-6 w-6')}</div>`
+// ============================================================
+//  Paginated tables for the "Existing …" lists (5 rows/page)
+// ============================================================
+const PAGE_SIZE = 5
+
+const TABLE_CFG = {
+  gallery_images: {
+    mount: 'galleryList', empty: 'No photos yet.',
+    select: 'id, title, image_url, category', orderCol: 'uploaded_at',
+    columns: [
+      { label: 'Photo', render: (r) => `<img src="${r.image_url || ''}" onerror="this.style.visibility='hidden'" class="h-10 w-16 object-cover rounded" alt="" />` },
+      { label: 'Title', render: (r) => esc(r.title || '—') },
+      { label: 'Category', render: (r) => `<span class="capitalize">${esc(r.category || '')}</span>` },
+    ],
+  },
+  events: {
+    mount: 'eventList', empty: 'No events yet.',
+    select: 'id, title, event_date, location, is_featured', orderCol: 'event_date',
+    columns: [
+      { label: 'Title', render: (r) => esc(r.title || '—') },
+      { label: 'Date', render: (r) => esc(r.event_date || '—') },
+      { label: 'Location', render: (r) => esc(r.location || '—') },
+      { label: 'Featured', render: (r) => (r.is_featured ? '<span class="text-amber-500">★</span>' : '') },
+    ],
+  },
+  honourees: {
+    mount: 'hofList', empty: 'No entries yet.',
+    select: 'id, name, award, photo_url, is_spotlight', orderCol: 'created_at',
+    columns: [
+      { label: 'Photo', render: (r) => `<img src="${r.photo_url || ''}" onerror="this.style.visibility='hidden'" class="h-10 w-10 rounded-full object-cover bg-gray-100" alt="" />` },
+      { label: 'Name', render: (r) => esc(r.name || '') },
+      { label: 'Award', render: (r) => esc(r.award || '') },
+      { label: 'Spotlight', render: (r) => (r.is_spotlight ? '<span class="text-amber-500">★</span>' : '') },
+    ],
+  },
+}
+
+const tableState = {
+  gallery_images: { rows: [], page: 1 },
+  events: { rows: [], page: 1 },
+  honourees: { rows: [], page: 1 },
+}
+
+async function loadTable(key) {
+  const cfg = TABLE_CFG[key]
+  const mount = document.getElementById(cfg.mount)
+  mount.innerHTML = `<div class="flex justify-center py-6">${window.spinner('h-6 w-6')}</div>`
   try {
-    const { data, error } = await supabase
-      .from('gallery_images')
-      .select('id, title, image_url, category')
-      .order('uploaded_at', { ascending: false })
-      .limit(12)
+    const { data, error } = await supabase.from(key).select(cfg.select).order(cfg.orderCol, { ascending: false })
     if (error) throw error
-    if (!data || !data.length) { list.innerHTML = '<p class="col-span-3 text-sm text-gray-400">No photos yet.</p>'; return }
-    list.innerHTML = data.map((img) => `
-      <div class="relative group rounded-lg overflow-hidden">
-        <img src="${img.image_url}" alt="" class="h-20 w-full object-cover" />
-        <button data-id="${img.id}" class="del-gallery absolute inset-0 bg-black/60 text-white opacity-0 group-hover:opacity-100 transition-opacity grid place-items-center text-xs font-semibold">Delete</button>
-      </div>`).join('')
-    list.querySelectorAll('.del-gallery').forEach((b) =>
-      b.addEventListener('click', () => removeRow('gallery_images', b.dataset.id, loadGallery)))
+    tableState[key].rows = data || []
+    renderTable(key)
   } catch (err) {
-    list.innerHTML = `<p class="col-span-3 text-sm text-red-500">${err.message}</p>`
+    console.error(err)
+    mount.innerHTML = `<p class="text-sm text-red-500">${esc(err.message)}</p>`
   }
 }
+
+function renderTable(key) {
+  const cfg = TABLE_CFG[key]
+  const st = tableState[key]
+  const mount = document.getElementById(cfg.mount)
+  if (!st.rows.length) { mount.innerHTML = `<p class="text-sm text-gray-400">${esc(cfg.empty)}</p>`; return }
+
+  const pages = Math.max(1, Math.ceil(st.rows.length / PAGE_SIZE))
+  if (st.page > pages) st.page = pages
+  if (st.page < 1) st.page = 1
+  const start = (st.page - 1) * PAGE_SIZE
+  const pageRows = st.rows.slice(start, start + PAGE_SIZE)
+
+  const head = cfg.columns.map((c) => `<th class="px-3 py-2 text-left font-semibold text-navy whitespace-nowrap">${c.label}</th>`).join('') + '<th class="px-3 py-2"></th>'
+  const body = pageRows.map((r) => {
+    const tds = cfg.columns.map((c) => `<td class="px-3 py-2 align-middle">${c.render(r)}</td>`).join('')
+    return `<tr class="border-t border-gray-100 hover:bg-lightgray/60">${tds}<td class="px-3 py-2 text-right"><button data-id="${r.id}" class="del-row text-red-500 hover:text-red-700 text-xs font-semibold">Delete</button></td></tr>`
+  }).join('')
+
+  let pager = ''
+  if (pages > 1) {
+    const btn = (label, page, disabled, active) =>
+      `<button data-page="${page}" ${disabled ? 'disabled' : ''} class="pager-btn px-3 py-1.5 rounded-md text-sm font-medium ${active ? 'bg-amber-500 text-navy' : 'bg-lightgray text-navy hover:bg-gray-200'} ${disabled ? 'opacity-40 cursor-not-allowed' : ''}">${label}</button>`
+    let nums = ''
+    for (let p = 1; p <= pages; p++) nums += btn(p, p, false, p === st.page)
+    pager = `<div class="flex items-center justify-between mt-3 flex-wrap gap-2">
+      <span class="text-xs text-gray-500">Showing ${start + 1}–${Math.min(start + PAGE_SIZE, st.rows.length)} of ${st.rows.length}</span>
+      <div class="flex items-center gap-1 flex-wrap">
+        ${btn('‹ Prev', st.page - 1, st.page === 1, false)}${nums}${btn('Next ›', st.page + 1, st.page === pages, false)}
+      </div></div>`
+  }
+
+  mount.innerHTML = `<div class="overflow-x-auto border border-gray-100 rounded-xl">
+      <table class="min-w-full text-sm"><thead class="bg-lightgray"><tr>${head}</tr></thead><tbody>${body}</tbody></table>
+    </div>${pager}`
+
+  mount.querySelectorAll('.del-row').forEach((b) =>
+    b.addEventListener('click', () => removeRow(key, b.dataset.id, () => loadTable(key))))
+  mount.querySelectorAll('.pager-btn').forEach((b) =>
+    b.addEventListener('click', () => { tableState[key].page = Number(b.dataset.page); renderTable(key) }))
+}
+
+// Thin wrappers kept so existing callers (form submits, boot) still work.
+function loadGallery() { return loadTable('gallery_images') }
+function loadEvents() { return loadTable('events') }
+function loadHof() { return loadTable('honourees') }
 
 // ---------- Event publish ----------
 const eventForm = document.getElementById('eventForm')
@@ -199,29 +280,6 @@ eventForm.addEventListener('submit', async (e) => {
   }
 })
 
-async function loadEvents() {
-  const list = document.getElementById('eventList')
-  list.innerHTML = `<div class="flex justify-center py-4">${window.spinner('h-6 w-6')}</div>`
-  try {
-    const { data, error } = await supabase
-      .from('events')
-      .select('id, title, event_date')
-      .order('event_date', { ascending: false })
-      .limit(15)
-    if (error) throw error
-    if (!data || !data.length) { list.innerHTML = '<p class="text-sm text-gray-400">No events yet.</p>'; return }
-    list.innerHTML = data.map((ev) => `
-      <div class="flex items-center justify-between bg-lightgray rounded-lg px-3 py-2 text-sm">
-        <span><span class="font-medium text-navy">${esc(ev.title)}</span>${ev.event_date ? ` <span class="text-gray-400">· ${ev.event_date}</span>` : ''}</span>
-        <button data-id="${ev.id}" class="del-event text-red-500 hover:text-red-700 text-xs font-semibold">Delete</button>
-      </div>`).join('')
-    list.querySelectorAll('.del-event').forEach((b) =>
-      b.addEventListener('click', () => removeRow('events', b.dataset.id, loadEvents)))
-  } catch (err) {
-    list.innerHTML = `<p class="text-sm text-red-500">${err.message}</p>`
-  }
-}
-
 // ---------- Hall of Fame / Spotlight ----------
 const hofForm = document.getElementById('hofForm')
 hofForm.addEventListener('submit', async (e) => {
@@ -258,32 +316,6 @@ hofForm.addEventListener('submit', async (e) => {
     btn.innerHTML = orig
   }
 })
-
-async function loadHof() {
-  const list = document.getElementById('hofList')
-  list.innerHTML = `<div class="col-span-full flex justify-center py-4">${window.spinner('h-6 w-6')}</div>`
-  try {
-    const { data, error } = await supabase
-      .from('honourees')
-      .select('id, name, award, photo_url, is_spotlight')
-      .order('created_at', { ascending: false })
-    if (error) throw error
-    if (!data || !data.length) { list.innerHTML = '<p class="col-span-full text-sm text-gray-400">No entries yet.</p>'; return }
-    list.innerHTML = data.map((h) => `
-      <div class="flex items-center gap-3 bg-lightgray rounded-lg p-2.5">
-        <img src="${h.photo_url || ''}" onerror="this.style.visibility='hidden'" class="h-10 w-10 rounded-full object-cover bg-white shrink-0" alt="" />
-        <div class="min-w-0 flex-1">
-          <p class="text-sm font-medium text-navy truncate">${esc(h.name)}</p>
-          <p class="text-xs text-gray-500 truncate">${esc(h.award || '')}${h.is_spotlight ? ' · ★ Spotlight' : ''}</p>
-        </div>
-        <button data-id="${h.id}" class="del-hof text-red-500 hover:text-red-700 text-xs font-semibold shrink-0">Delete</button>
-      </div>`).join('')
-    list.querySelectorAll('.del-hof').forEach((b) =>
-      b.addEventListener('click', () => removeRow('honourees', b.dataset.id, loadHof)))
-  } catch (err) {
-    list.innerHTML = `<p class="col-span-full text-sm text-red-500">${esc(err.message)}</p>`
-  }
-}
 
 // ---------- Delete ----------
 async function removeRow(table, id, reload) {
