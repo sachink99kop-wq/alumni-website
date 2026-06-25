@@ -144,7 +144,7 @@ function buildFooter() {
         <div class="flex gap-3">${socials}</div>
       </div>
     </div>
-    <div class="border-t border-white/10 py-4 text-center text-sm text-gray-400">
+    <div class="border-t border-white/10 pt-4 pb-8 px-6 text-center text-sm text-gray-400">
       &copy; ${year} ${COLLEGE_NAME} Alumni Association. All rights reserved. &middot; Powered by ${COLLEGE_NAME}
     </div>
   </footer>`
