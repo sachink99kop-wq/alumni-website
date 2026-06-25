@@ -1,0 +1,62 @@
+# ============================================================
+#  Sainik Military School Alumni — Apache / LiteSpeed config
+#  For Hostinger shared hosting (drop in public_html).
+#  Static site: vanilla HTML + ES modules + Tailwind CDN.
+# ============================================================
+
+# Default document
+DirectoryIndex index.html
+
+# ---- Force HTTPS (Hostinger provides free SSL) ----
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} off
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# ---- Correct MIME types (ES modules must be JS) ----
+<IfModule mod_mime.c>
+  AddType application/javascript .js .mjs
+  AddType image/svg+xml .svg
+  AddType application/json .json
+  AddType application/manifest+json .webmanifest
+</IfModule>
+
+# ---- Gzip / Brotli compression ----
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml \
+    application/javascript application/json image/svg+xml
+</IfModule>
+
+# ---- Browser caching ----
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html                "access plus 0 seconds"
+  ExpiresByType text/css                 "access plus 7 days"
+  ExpiresByType application/javascript   "access plus 1 day"
+  ExpiresByType image/svg+xml            "access plus 30 days"
+  ExpiresByType image/png                "access plus 30 days"
+  ExpiresByType image/jpeg               "access plus 30 days"
+  ExpiresByType image/webp               "access plus 30 days"
+  ExpiresByType image/x-icon             "access plus 30 days"
+</IfModule>
+
+# ---- Security headers ----
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  # Keep the admin page out of search engines
+  <FilesMatch "admin\.html$">
+    Header set X-Robots-Tag "noindex, nofollow"
+  </FilesMatch>
+</IfModule>
+
+# ---- Block access to dev / source-control files ----
+<FilesMatch "(^\.|\.bat$|\.md$|launch\.json$)">
+  Require all denied
+</FilesMatch>
+
+# Allow the friendly 404 to fall back to the homepage is NOT used
+# (multi-page site). Optionally set a custom error page:
+# ErrorDocument 404 /index.html

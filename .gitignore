@@ -9,3 +9,7 @@ node_modules/
 # Local env files — keep real secrets out of git
 .env
 .env.*
+
+# Deployment build artifacts (produced by package.bat)
+alumni-website-hostinger.zip
+_deploy_stage/
